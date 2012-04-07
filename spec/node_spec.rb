@@ -3,8 +3,17 @@ require 'node'
 
 describe Node do
 
+  TEST_RANGE = (1..4)
+
   before :each do
     @testNode = Node.new "test"
+  end
+  before :all do
+    @growthNode = Node.new "growth"
+    TEST_RANGE.each do |i|
+      newNode = Node.new( "#{i}" )
+      @growthNode.addArc( newNode, i )
+    end
   end
 
   describe "#new" do
@@ -27,44 +36,44 @@ describe Node do
     @testNode.respond_to?(:adjacentTo?).should be_true
   end
 
-  # expansion testing
-  growthNode = Node.new "growth"
-  (1..4).each do |i|
-    newNode = Node.new( "#{i}" )
-    growthNode.addArc( newNode, i )
-    
-    describe "#adjacentTo?" do
+  describe "#adjacentTo?" do
+    TEST_RANGE.each do |i|
       it "correctly describes added nodes" do
-        growthNode.adjacentTo?( "#{i}" ).should be_true
+        @growthNode.adjacentTo?( "#{i}" ).should be_true
       end
       it "correctly omits non-adjacent nodes" do
-        growthNode.adjacentTo?( "FOO" ).should           be_false
-        growthNode.adjacentTo?( "#{-i}" ).should       be_false
-        growthNode.adjacentTo?( growthNode.name ).should be_false
+        @growthNode.adjacentTo?( "FOO" ).should            be_false
+        @growthNode.adjacentTo?( "#{-i}" ).should          be_false
+        @growthNode.adjacentTo?( @growthNode.name ).should be_false
       end
     end
+  end
     
-    describe "#arcForName" do
+  describe "#arcForName" do
+    TEST_RANGE.each do |i|
       it "retrieves the arc corresponding to destination name" do
-        growthNode.arcForName( "#{i}" ).destination.should equal newNode
+        @growthNode.arcForName( "#{i}" ).destination.name.should eql "#{i}"
       end
       it "returns nil for non-adjacent destination names" do
-        growthNode.arcForName( "FOO" ).should           be_nil
-        growthNode.arcForName( "#{-i}" ).should       be_nil
-        growthNode.arcForName( growthNode.name ).should be_nil
+        @growthNode.arcForName( "FOO" ).should            be_nil
+        @growthNode.arcForName( "#{-i}" ).should          be_nil
+        @growthNode.arcForName( @growthNode.name ).should be_nil
       end
     end
-    
-    describe "#arcForNode" do
+  end
+  
+  describe "#arcForNode" do
+    TEST_RANGE.each do |i|
       it "retrieves the arc corresponding to the destination node" do
-        growthNode.arcForNode( newNode ).destination.should equal newNode
+        # This is contrived...
+        fetchNode = @growthNode.arcForName( "#{i}" ).destination
+        @growthNode.arcForNode( fetchNode ).destination.should equal fetchNode
       end
       it "returns nil for non-adjacent nodes" do
-        growthNode.arcForNode( Node.new("FOO") ).should be_nil
-        growthNode.arcForName( growthNode ).should      be_nil
+        @growthNode.arcForNode( Node.new("FOO") ).should be_nil
+        @growthNode.arcForName( @growthNode ).should     be_nil
       end
     end
-
   end
   
 end # class test

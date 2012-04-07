@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'arc'
 
-describe "#new" do
+describe Arc do
 
   before :each do
     @arc = Arc.new( Node.new( "foo" ), 10 )
