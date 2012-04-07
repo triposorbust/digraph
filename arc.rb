@@ -9,7 +9,7 @@ class Arc
       unless node.is_a?( Node )
         raise TypeError "arcs require nodes!"
       end
-      raise TypeError "weights are integers"  unless weight.is_a? Integer
+      raise TypeError "weights are integers"  unless weight.is_a? Numeric
     end
     @source = source
     @dest   = dest
