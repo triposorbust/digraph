@@ -26,6 +26,12 @@ describe Arc do
     it "returns the weight of the Arc" do
       @arc.weight.should eql 10
       end
+    it "has a mutable copy of weight" do
+      (1..10).each { |w|
+        @arc.weight = w
+        @arc.weight.should eql w
+      }
+    end
   end
 
 end
