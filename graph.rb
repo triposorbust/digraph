@@ -8,9 +8,8 @@ class Graph
     @nodes = Hash.new
   end
 
-  def nodes
-    @nodes.values
-  end
+  def nodes;     @nodes.values; end
+  def nodeNames; @nodes.keys;   end
 
   def addNode( n )
     raise TypeError, "Graph can only add nodes" unless n.is_a? Node
