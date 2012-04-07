@@ -29,7 +29,7 @@ describe Node do
 
   # expansion testing
   growthNode = Node.new "growth"
-  (0..7).each do |i|
+  (1..7).each do |i|
     newNode = Node.new( "#{i}" )
     growthNode.addArc( newNode, i )
     
@@ -39,7 +39,7 @@ describe Node do
       end
       it "correctly omits non-adjacent nodes" do
         growthNode.adjacentTo?( "FOO" ).should           be_false
-        growthNode.adjacentTo?( "-#{i}" ).should     be_false
+        growthNode.adjacentTo?( "#{-i}" ).should       be_false
         growthNode.adjacentTo?( growthNode.name ).should be_false
       end
     end
@@ -50,7 +50,7 @@ describe Node do
       end
       it "returns nil for non-adjacent destination names" do
         growthNode.arcForName( "FOO" ).should           be_nil
-        growthNode.arcForName( "-#{i}" ).should     be_nil
+        growthNode.arcForName( "#{-i}" ).should       be_nil
         growthNode.arcForName( growthNode.name ).should be_nil
       end
     end
@@ -64,7 +64,7 @@ describe Node do
         growthNode.arcForName( growthNode ).should      be_nil
       end
     end
-    
-  end # expansion testing
 
+  end
+  
 end # class test
