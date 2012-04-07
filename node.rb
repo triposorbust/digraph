@@ -1,25 +1,26 @@
 require 'arc'
 
 # ANDY: is this cleaner if it inherits from array?
-# Node < Array
+# class Node < Array
 class Node
-  attr_reader :name, :arcs
+  attr_reader :name
 
   def initialize( name )
-    @name = name
+    raise TypeError unless name.is_a? String
+    @name = name.clone
+    @name.freeze
+
     @arcs = Array.new
   end
 
   def addArc( destination, weight )
-    # ANDY: these checks are redundant.
     raise TypeError "destinations are nodes" unless destination.is_a? Node
     raise TypeError "weight must be numeric" unless weight.is_a? Numeric
 
     @arcs << Arc.new(destination, weight)
   end
 
-  # ANDY: interact through names or through objects?
-  #       decide on an interface. Shouldn't need both.
+  # ANDY: Can we consolidate to a single interface?
 
   # adjacentTo? :: String -> Bool
   def adjacentTo?( destination )
