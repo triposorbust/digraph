@@ -1,7 +1,6 @@
 require 'arc'
 
-# ANDY: is this cleaner if it inherits from array?
-# class Node < Array
+# class Node < Array # (of Arc)
 class Node
   attr_reader :name
 

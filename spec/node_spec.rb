@@ -29,7 +29,7 @@ describe Node do
 
   # expansion testing
   growthNode = Node.new "growth"
-  (1..7).each do |i|
+  (1..4).each do |i|
     newNode = Node.new( "#{i}" )
     growthNode.addArc( newNode, i )
     
