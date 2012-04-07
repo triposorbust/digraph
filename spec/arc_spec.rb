@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'node'
 require 'arc'
 
 describe "#new" do
