@@ -1,7 +1,6 @@
 require 'node'
 require 'arc'
 
-# class Graph < Hash # of String, Node
 class Graph
 
   def initialize
@@ -27,4 +26,6 @@ class Graph
   def containsNodeWithName?( nm ); @nodes.has_key?( nm );  end
   def nodesCount();                @nodes.count;           end
   def nodeWithName( nm );          @nodes[nm];             end
+# def nodes();                     @nodes.values;          end 
+
 end

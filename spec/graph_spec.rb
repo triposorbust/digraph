@@ -84,7 +84,8 @@ describe Graph do
         @testGraph.containsNodeWithName?( n.name ).should be_false
       end 
       TEST_RANGE.each do |i|
-        @testGraph.containsNodeWithName?( "#{i}" ).should be_false
+        @testGraph.containsNodeWithName?( "#{i}" ).should    be_false
+        @growthGraph.containsNodeWithName?( "#{-i}" ).should be_false
       end
     end
   end
@@ -97,5 +98,16 @@ describe Graph do
       @nodes.each { |n| @testGraph.nodeWithName( n.name ).should be_nil }
     end
   end
+
+=begin
+  describe "#nodes" do
+    it "returns an array of nodes" do
+      @testGraph.nodes.should   be_an_instance_of Array
+      @growthGraph.nodes.should be_an_instance_of Array
+      @testGraph.nodes.each   { |n| n.should be_an_instance_of Node }
+      @growthGraph.nodes.each { |n| n.should be_an_instance_of Node }
+    end
+  end
+=end
 
 end
