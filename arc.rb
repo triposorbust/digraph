@@ -1,19 +1,19 @@
 require 'node'
 
 class Arc
+  # Arcs always originate in the parent Node.
+  attr_reader :destination, :weight
 
-  attr_reader :source, :dest, :weight
+  def initialize destination, weight
+    raise TypeError "arcs must link to node" unless destination.is_a? Node
+    raise TypeError "weight must be numeric" unless weight.is_a? Numeric
 
-  def initialize source, dest, weight
-    [source,dest].each do |node|
-      unless node.is_a?( Node )
-        raise TypeError "arcs require nodes!"
-      end
-      raise TypeError "weights are numeric"  unless weight.is_a? Numeric
-    end
-    @source = source
-    @dest   = dest
-    @weight = weight
+    @destination = destination
+    @weight      = weight
+  end
+
+  def name
+    destination.name
   end
 
 end

@@ -5,32 +5,21 @@ require 'arc'
 describe "#new" do
 
   before :each do
-    @arc = Arc.new( Node.new( "A" ),
-                    Node.new( "B" ),
-                    10 )
+    @arc = Arc.new( Node.new( "foo" ), 10 )
   end
 
   describe "#new" do
-    it "takes three arguments and returns an arc instance" do
+    it "takes two arguments and returns an arc instance" do
       @arc.should be_an_instance_of Arc
     end
   end
 
-  describe "#source" do
+  describe "#destination" do
     it "returns a Node" do
-      @arc.source.should be_an_instance_of Node
-    end
-    it "returns the Source Node" do
-      @arc.source.name.should eql "A"
-    end
-  end
-
-  describe "#dest" do
-    it "returns a Node" do
-      @arc.dest.should be_an_instance_of Node
+      @arc.destination.should be_an_instance_of Node
     end
     it "returns the Destination Node" do
-      @arc.dest.name.should eql "B"
+      @arc.destination.name.should eql "foo"
     end
   end
 
@@ -38,6 +27,12 @@ describe "#new" do
     it "returns the weight of the Arc" do
       @arc.weight.should eql 10
       end
+  end
+
+  describe "#name" do
+    it "returns the name of the destination node" do
+      @arc.name.should eql "foo"
+    end
   end
 
 end
