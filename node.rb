@@ -18,12 +18,26 @@ class Node
     @arcs << Arc.new(destination, weight)
   end
 
-  def adjacentTo?( destinationName )
-    if arcs.detect { |a| a.name == destinationName }
-      return true
+  # ANDY: interact through names or through objects?
+  #       decide on an interface. Shouldn't need both.
+
+  # adjacentTo? :: String -> Bool
+  def adjacentTo?( destination )
+    if destination.is_a? Node
+      return arcForNode( destination ) ? true : false
     else
-      return false
+      return arcForName( destination ) ? true : false
     end
+  end
+
+  # arcForNode :: Node -> Arc
+  def arcForNode( destinationNode )
+    @arcs.detect { |a| a.destination == destinationNode }
+  end
+
+  # arcForName :: String -> Arc
+  def arcForName( destinationName )
+    @arcs.detect { |a| a.destination.name == destinationName }
   end
 
 end

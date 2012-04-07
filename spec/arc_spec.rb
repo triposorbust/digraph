@@ -29,10 +29,4 @@ describe "#new" do
       end
   end
 
-  describe "#name" do
-    it "returns the name of the destination node" do
-      @arc.name.should eql "foo"
-    end
-  end
-
 end

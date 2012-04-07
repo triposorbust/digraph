@@ -12,8 +12,4 @@ class Arc
     @weight      = weight
   end
 
-  def name
-    destination.name
-  end
-
 end
