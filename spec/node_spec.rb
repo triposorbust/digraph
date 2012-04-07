@@ -13,9 +13,9 @@ describe Node do
     end
   end
 
-  describe "#nm" do
+  describe "#name" do
     it "returns correct node name" do
-      @testnode.nm.should eql "Test"
+      @testnode.name.should eql "Test"
     end
   end
 

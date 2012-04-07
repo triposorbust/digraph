@@ -1,9 +1,9 @@
 class Node
 
-  attr_reader :nm
+  attr_reader :name
 
-  def initialize( nm )
-    @nm = nm
+  def initialize( name )
+    @name = name
   end
 
 end

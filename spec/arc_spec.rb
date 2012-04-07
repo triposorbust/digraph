@@ -16,4 +16,28 @@ describe "#new" do
     end
   end
 
+  describe "#source" do
+    it "returns a Node" do
+      @arc.source.should be_an_instance_of Node
+    end
+    it "returns the Source Node" do
+      @arc.source.name.should eql "A"
+    end
+  end
+
+  describe "#dest" do
+    it "returns a Node" do
+      @arc.dest.should be_an_instance_of Node
+    end
+    it "returns the Destination Node" do
+      @arc.dest.name.should eql "B"
+    end
+  end
+
+  describe "#weight" do
+    it "returns the weight of the Arc" do
+      @arc.weight.should eql 10
+      end
+  end
+
 end
