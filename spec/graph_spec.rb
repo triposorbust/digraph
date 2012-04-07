@@ -3,7 +3,7 @@ require 'graph'
 
 describe Graph do
 
-  before :all do
+  before :each do
     @testGraph = Graph.new
   end
 

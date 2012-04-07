@@ -5,7 +5,7 @@ class Node
   attr_reader :name
 
   def initialize( name )
-    raise TypeError unless name.is_a? String
+    raise TypeError, "node names are strings"  unless name.is_a? String
     @name = name.clone
     @name.freeze
 
@@ -13,8 +13,8 @@ class Node
   end
 
   def addArc( destination, weight )
-    raise TypeError "destinations are nodes" unless destination.is_a? Node
-    raise TypeError "weight must be numeric" unless weight.is_a? Numeric
+    raise TypeError, "destinations are nodes" unless destination.is_a? Node
+    raise TypeError, "weight must be numeric" unless weight.is_a? Numeric
 
     @arcs << Arc.new(destination, weight)
   end
