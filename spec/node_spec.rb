@@ -3,14 +3,14 @@ require 'node'
 
 describe Node do
 
-  TEST_RANGE = (1..4)
+  SPEC_TEST_RANGE = (1..4)
 
   before :each do
     @testNode = Node.new "test"
   end
   before :all do
     @growthNode = Node.new "growth"
-    TEST_RANGE.each do |i|
+    SPEC_TEST_RANGE.each do |i|
       newNode = Node.new( "#{i}" )
       @growthNode.addArc( newNode, i )
     end
@@ -37,7 +37,7 @@ describe Node do
   end
 
   describe "#adjacentTo?" do
-    TEST_RANGE.each do |i|
+    SPEC_TEST_RANGE.each do |i|
       it "correctly describes added nodes" do
         @growthNode.adjacentTo?( "#{i}" ).should be_true
       end
@@ -50,7 +50,7 @@ describe Node do
   end
     
   describe "#arcForName" do
-    TEST_RANGE.each do |i|
+    SPEC_TEST_RANGE.each do |i|
       it "retrieves the arc corresponding to destination name" do
         @growthNode.arcForName( "#{i}" ).destination.name.should eql "#{i}"
       end
@@ -63,7 +63,7 @@ describe Node do
   end
   
   describe "#arcForNode" do
-    TEST_RANGE.each do |i|
+    SPEC_TEST_RANGE.each do |i|
       it "retrieves the arc corresponding to the destination node" do
         # This is contrived...
         fetchNode = @growthNode.arcForName( "#{i}" ).destination

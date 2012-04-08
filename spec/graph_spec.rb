@@ -3,7 +3,7 @@ require 'graph'
 
 describe Graph do
 
-  TEST_RANGE = (1..4)
+  GRAPH_TEST_RANGE = (1..4)
 
   before :each do
     @testGraph = Graph.new
@@ -12,7 +12,7 @@ describe Graph do
   before :all do
     @nodes = Array.new
     @growthGraph = Graph.new
-    TEST_RANGE.each do |i|
+    GRAPH_TEST_RANGE.each do |i|
       newNode = Node.new( "#{i}" )
       @growthGraph.addNode( newNode )
       @nodes << newNode
@@ -30,7 +30,7 @@ describe Graph do
 
   describe "#nodesCount" do
     it "provides an accurate count after adding nodes" do
-      @growthGraph.nodesCount.should eql TEST_RANGE.count
+      @growthGraph.nodesCount.should eql GRAPH_TEST_RANGE.count
     end
     it "provides an accurate initial count" do
       @testGraph.nodesCount.should eql 0
@@ -48,13 +48,13 @@ describe Graph do
 
   describe "#addNode" do
     it "correctly adds elements to graph" do
-      @growthGraph.nodesCount.should eql TEST_RANGE.count
-      TEST_RANGE.each do |i|
+      @growthGraph.nodesCount.should eql GRAPH_TEST_RANGE.count
+      GRAPH_TEST_RANGE.each do |i|
         @growthGraph.containsNodeWithName?( "#{i}" ).should be_true
       end
     end
     it "does not add weird elements" do
-      TEST_RANGE.each do |i|
+      GRAPH_TEST_RANGE.each do |i|
         @growthGraph.containsNodeWithName?( "#{-i}" ).should be_false
       end
       @growthGraph.containsNodeWithName?( "FOO" ).should be_false
@@ -75,7 +75,7 @@ describe Graph do
       @nodes.each do |n|
         @growthGraph.containsNodeWithName?( n.name ).should be_true
       end
-      TEST_RANGE.each do |i|
+      GRAPH_TEST_RANGE.each do |i|
         @growthGraph.containsNodeWithName?( "#{i}" ).should be_true
       end
     end
@@ -83,7 +83,7 @@ describe Graph do
       @nodes.each do |n|
         @testGraph.containsNodeWithName?( n.name ).should be_false
       end 
-      TEST_RANGE.each do |i|
+      GRAPH_TEST_RANGE.each do |i|
         @testGraph.containsNodeWithName?( "#{i}" ).should    be_false
         @growthGraph.containsNodeWithName?( "#{-i}" ).should be_false
       end
