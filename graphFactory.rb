@@ -4,7 +4,26 @@ module GraphFactory
 
   # buildGraph :: String -> Graph
   def buildGraph( str )
-    return Graph.new
+    graph = Graph.new
+
+    str.split.map! { |w|
+      self.hashify w
+    }
+
+    return graph
+  end
+
+  def hashify( str )
+    hash   = Hash.new
+    weight = self.getWeight( str )
+    names  = self.getNames( str )
+    raise ArgumentError, "poorly formatted input" unless names.count == 2
+    
+    hash.store( :source, names[0] )
+    hash.store( :destination, names[1] )
+    hash.store( :weight, weight   )
+
+    return hash
   end
 
   def getWeight( str )
@@ -13,7 +32,7 @@ module GraphFactory
   end
 
   def getNames( str )
-    str.scan( /[A-Z]{1}[a-z,0-9,_,\-]*/ )
+    str.scan( /[A-Z]{1}[a-z,_,\-]*/ )
   end
 
 end

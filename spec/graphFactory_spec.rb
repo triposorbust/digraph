@@ -13,7 +13,7 @@ describe GraphFactory do
 
   describe "#buildGraph" do
     it "takes a string and returns a graph" do
-      @test.buildGraph("FOO").should be_an_instance_of Graph
+      @test.buildGraph("FooBar").should be_an_instance_of Graph
     end
   end
 
@@ -71,6 +71,34 @@ describe GraphFactory do
       @test.getNames( "F-o-oB-a-r" )[0].should eql "F-o-o"
       @test.getNames( "F-o-oB-a-r" )[1].should eql "B-a-r"
     end
+  end
+
+  describe "#hashify" do
+    it "returns a hash" do
+      @test.hashify( "WaffleIron" ).should be_an_instance_of Hash
+    end
+    it "returns hash with source key" do
+      @test.hashify( "WaffleIron" ).has_key?( :source ).should be_true
+    end
+    it "returns hash with destination key" do
+      @test.hashify( "WaffleIron" ).has_key?( :destination ).should be_true
+    end
+    it "returns hash with weight key" do
+      @test.hashify( "WaffleIron" ).has_key?( :weight ).should be_true
+    end
+    it "properly parses toy inputs" do
+      h = @test.hashify( "WaffleIron8" )
+      h[:source].should      eql "Waffle"
+      h[:destination].should eql "Iron"
+      h[:weight].should      eql 8.0
+    end
+    it "properly parses sample inputs" do
+      h = @test.hashify( "AB10" )
+      h[:source].should      eql "A"
+      h[:destination].should eql "B"
+      h[:weight].should      eql 10.0
+    end
+    
   end
 
 end
