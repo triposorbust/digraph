@@ -52,6 +52,17 @@ describe GraphFactory do
       b.adjacentTo?(a).should be_false
     end
   end
+end
+
+describe_internally GraphFactory do
+
+  class GraphFactoryTest
+    include GraphFactory
+  end
+
+  before :each do
+    @test = GraphFactoryTest.new
+  end
 
   describe "#getWeight" do
     it "returns 0 if there are no digits at end" do

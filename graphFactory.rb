@@ -7,15 +7,17 @@ module GraphFactory
     graph = Graph.new
 
     arcWords  = str.split
-    arcHashes = arcWords.map { |w| self.hashify w }
+    arcHashes = arcWords.map { |w| hashify w }
     arcHashes.each { |h|
-      sourceNode      = self.nodeForName( graph, h[:source] )
-      destinationNode = self.nodeForName( graph, h[:destination] )
+      sourceNode      = nodeForName( graph, h[:source] )
+      destinationNode = nodeForName( graph, h[:destination] )
       graph.addArc( sourceNode, destinationNode, h[:weight] )
     }
 
     return graph
   end
+
+  private
 
   def nodeForName( graph, name )
     node = nil
@@ -30,8 +32,8 @@ module GraphFactory
 
   def hashify( str )
     hash   = Hash.new
-    weight = self.getWeight( str )
-    names  = self.getNames( str )
+    weight = getWeight( str )
+    names  = getNames( str )
     raise ArgumentError, "poorly formatted input" unless names.count == 2
     
     hash.store( :source, names[0] )
