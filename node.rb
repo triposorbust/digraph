@@ -25,8 +25,10 @@ class Node
   def adjacentTo?( destination )
     if destination.is_a? Node
       return arcForNode( destination ) ? true : false
-    else
+    elsif destination.is_a? String
       return arcForName( destination ) ? true : false
+    else
+      raise TypeError, "destination is either a Node or a String"
     end
   end
 
