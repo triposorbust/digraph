@@ -5,7 +5,7 @@ describe Graph do
 
   before :each do
     @testGraph = Graph.new
-    graphStr   = "AB5 BC4 CD8 DC8 DE6 AD5 CE2 EB3 AE7"
+    graphStr   = "AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7"
     @fullGraph = GraphFactory.buildGraph( graphStr )
   end
 
@@ -37,7 +37,7 @@ describe_internally Graph do
 
   before :each do
     @testGraph = Graph.new
-    graphStr   = "AB5 BC4 CD8 DE6 AD5 CE2 EB3 AE7"
+    graphStr   = "AB5, BC4, CD8, DE6, AD5, CE2, EB3, AE7"
     @fullGraph = GraphFactory.buildGraph( graphStr )
   end
 

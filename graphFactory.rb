@@ -6,7 +6,7 @@ module GraphFactory
   def GraphFactory.buildGraph( str )
     graph = Graph.new
 
-    arcWords  = str.split
+    arcWords  = str.gsub(",","").split
     arcHashes = arcWords.map { |w| hashify w }
     arcHashes.each { |h|
       sourceNode      = nodeForName( graph, h[:source] )
