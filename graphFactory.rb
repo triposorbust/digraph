@@ -6,11 +6,26 @@ module GraphFactory
   def buildGraph( str )
     graph = Graph.new
 
-    str.split.map! { |w|
+    str.split.map!{ |w| # words
       self.hashify w
+    }.each{ |h| # arc hashes
+      sn = self.nodeForName( graph, h[:source] )
+      dn = self.nodeForName( graph, h[:destination] )
+      graph.addArc( sn, dn, h[:weight] )
     }
 
     return graph
+  end
+
+  def nodeForName( graph, name )
+    node = nil
+    if graph.containsNodeWithName?( name )
+      node = graph.nodeWithName( name )
+    else
+      node = Node.new( name )
+      graph.addNode( node )
+    end
+    node
   end
 
   def hashify( str )

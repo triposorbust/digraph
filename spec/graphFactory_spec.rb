@@ -97,8 +97,26 @@ describe GraphFactory do
       h[:source].should      eql "A"
       h[:destination].should eql "B"
       h[:weight].should      eql 10.0
+    end    
+  end
+
+  describe "#nodeForName" do
+    g    = Graph.new
+    node = nil
+    it "returns a node" do
+      node = @test.nodeForName( g, "Foo" )
+      node.should be_an_instance_of Node
     end
-    
+    it "returns a node with the correct name" do
+      node.name.should eql "Foo"
+    end
+    it "adds it to the graph upon retrieval" do
+      g.containsNodeWithName?( "Foo" ).should be_true
+      g.containsNode?( node ).should          be_true
+    end
+    it "returns the same node on repeat" do
+      @test.nodeForName( g, "Foo" ).should equal node
+    end
   end
 
 end

@@ -19,6 +19,8 @@ class Graph
     raise TypeError, "source must be a node"      unless src.is_a?    Node
     raise TypeError, "destination must be a node" unless dest.is_a?   Node
 
+    self.addNode(src)  if !( self.containsNode?(src) )
+    self.addNode(dest) if !( self.containsNode?(dest) )
     src.addArc( dest, weight )
   end
 
