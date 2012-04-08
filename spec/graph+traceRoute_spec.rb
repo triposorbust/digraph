@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'graphFactory' # to build test graphs.
 require 'graph+traceRoute'
 
