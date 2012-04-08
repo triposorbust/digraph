@@ -6,12 +6,12 @@ module GraphFactory
   def buildGraph( str )
     graph = Graph.new
 
-    str.split.map!{ |w| # words
-      self.hashify w
-    }.each{ |h| # arc hashes
-      sn = self.nodeForName( graph, h[:source] )
-      dn = self.nodeForName( graph, h[:destination] )
-      graph.addArc( sn, dn, h[:weight] )
+    arcWords  = str.split
+    arcHashes = arcWords.map { |w| self.hashify w }
+    arcHashes.each { |h|
+      sourceNode      = self.nodeForName( graph, h[:source] )
+      destinationNode = self.nodeForName( graph, h[:destination] )
+      graph.addArc( sourceNode, destinationNode, h[:weight] )
     }
 
     return graph
