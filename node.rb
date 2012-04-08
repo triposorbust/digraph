@@ -15,6 +15,7 @@ class Node
   def addArc( destination, weight )
     raise TypeError, "destinations are nodes" unless destination.is_a? Node
     raise TypeError, "weight must be numeric" unless weight.is_a? Numeric
+    raise ArgumentError, "duplicate name" if ( arcForName( destination.name ) )
 
     @arcs << Arc.new(destination, weight)
   end
