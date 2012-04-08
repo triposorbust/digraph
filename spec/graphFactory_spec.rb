@@ -13,7 +13,43 @@ describe GraphFactory do
 
   describe "#buildGraph" do
     it "takes a string and returns a graph" do
-      @test.buildGraph("FooBar").should be_an_instance_of Graph
+      g = @test.buildGraph("AB1 BC2 CD3")
+      g.should be_an_instance_of Graph
+    end
+    it "adds the right number of nodes" do
+      g = @test.buildGraph("AB1 BC2 CD3")
+      g.nodesCount.should eql 4
+    end
+    it "adds the correctly named nodes" do
+      g = @test.buildGraph("AB1 BC2 CD3")
+      g.containsNodeWithName?("A").should be_true
+      g.containsNodeWithName?("B").should be_true
+      g.containsNodeWithName?("C").should be_true
+    end
+    it "does not add any random nodes" do
+      g = @test.buildGraph("AB1 BC2 CD3")
+      g.containsNodeWithName?("E").should   be_false
+      g.containsNodeWithName?("Foo").should be_false
+    end
+    it "adds corect edges" do
+      g = @test.buildGraph("AB1 BC2 CD3")
+      a = g.nodeWithName("A")
+      b = g.nodeWithName("B")
+      c = g.nodeWithName("C")
+      d = g.nodeWithName("D")
+      a.adjacentTo?(b).should be_true
+      b.adjacentTo?(c).should be_true
+      c.adjacentTo?(d).should be_true
+    end
+    it "does not add any random edges" do
+      g = @test.buildGraph("AB1 BC2 CD3")
+      a = g.nodeWithName("A")
+      b = g.nodeWithName("B")
+      c = g.nodeWithName("C")
+      d = g.nodeWithName("D")
+      a.adjacentTo?(c).should be_false
+      b.adjacentTo?(d).should be_false
+      b.adjacentTo?(a).should be_false
     end
   end
 
