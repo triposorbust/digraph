@@ -3,7 +3,7 @@ require 'graph'
 module GraphFactory
 
   # buildGraph :: String -> Graph
-  def buildGraph( str )
+  def GraphFactory.buildGraph( str )
     graph = Graph.new
 
     arcWords  = str.split
@@ -19,7 +19,7 @@ module GraphFactory
 
   private
 
-  def nodeForName( graph, name )
+  def GraphFactory.nodeForName( graph, name )
     node = nil
     if graph.containsNodeWithName?( name )
       node = graph.nodeWithName( name )
@@ -30,7 +30,7 @@ module GraphFactory
     node
   end
 
-  def hashify( str )
+  def GraphFactory.hashify( str )
     hash   = Hash.new
     weight = getWeight( str )
     names  = getNames( str )
@@ -43,12 +43,12 @@ module GraphFactory
     return hash
   end
 
-  def getWeight( str )
+  def GraphFactory.getWeight( str )
     numStr = str[/[\d,\.]+$/]
     num = numStr.nil? ? 0 : numStr.to_f
   end
 
-  def getNames( str )
+  def GraphFactory.getNames( str )
     str.scan( /[A-Z]{1}[a-z,_,\-]*/ )
   end
 

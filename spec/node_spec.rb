@@ -3,15 +3,17 @@ require 'node'
 
 describe Node do
 
-  SPEC_TEST_RANGE = (1..4)
+  NODE_TEST_RANGE = (1..4)
 
   before :each do
     @testNode = Node.new "test"
   end
   before :all do
     @growthNode = Node.new "growth"
-    SPEC_TEST_RANGE.each do |i|
+    @addedNodes = Array.new
+    NODE_TEST_RANGE.each do |i|
       newNode = Node.new( "#{i}" )
+      @addedNodes << newNode
       @growthNode.addArc( newNode, i )
     end
   end
@@ -32,12 +34,8 @@ describe Node do
     @testNode.respond_to?(:addArc).should be_true
   end
 
-  it "has an adjacency check" do
-    @testNode.respond_to?(:adjacentTo?).should be_true
-  end
-
   describe "#adjacentTo?" do
-    SPEC_TEST_RANGE.each do |i|
+    NODE_TEST_RANGE.each do |i|
       it "correctly describes added nodes" do
         @growthNode.adjacentTo?( "#{i}" ).should be_true
       end
@@ -48,9 +46,42 @@ describe Node do
       end
     end
   end
-    
+
+  describe "#distanceTo" do
+    it "returns nil for non-adjacent nodes" do
+      @addedNodes.each do |node|
+        @testNode.distanceTo( node ).should be_nil
+      end
+    end
+    it "returns the correct distance for adjacent nodes" do
+      NODE_TEST_RANGE.each do |i|
+        @growthNode.distanceTo( @addedNodes[i-1] ).should eql i
+      end
+    end
+  end
+
+end # public method check
+
+describe_internally Node do
+
+  before :each do
+    @testNode = Node.new "test"
+  end
+
+  before :all do
+    @growthNode = Node.new "growth"
+    NODE_TEST_RANGE.each do |i|
+      newNode = Node.new( "#{i}" )
+      @growthNode.addArc( newNode, i )
+    end
+  end
+
+  it "has an adjacency check" do
+    @testNode.respond_to?(:adjacentTo?).should be_true
+  end
+
   describe "#arcForName" do
-    SPEC_TEST_RANGE.each do |i|
+    NODE_TEST_RANGE.each do |i|
       it "retrieves the arc corresponding to destination name" do
         @growthNode.arcForName( "#{i}" ).destination.name.should eql "#{i}"
       end
@@ -63,7 +94,7 @@ describe Node do
   end
   
   describe "#arcForNode" do
-    SPEC_TEST_RANGE.each do |i|
+    NODE_TEST_RANGE.each do |i|
       it "retrieves the arc corresponding to the destination node" do
         # This is contrived...
         fetchNode = @growthNode.arcForName( "#{i}" ).destination
@@ -75,5 +106,5 @@ describe Node do
       end
     end
   end
-  
-end # class test
+
+end # private method check

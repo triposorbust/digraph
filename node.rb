@@ -19,7 +19,15 @@ class Node
     @arcs << Arc.new(destination, weight)
   end
 
-  # ANDY: Can we consolidate to a single interface?
+  # distanceTo :: (Num a) => Node -> Maybe a
+  def distanceTo( node )
+    raise TypeError, "Nodes are only linked to Nodes" unless node.is_a? Node
+    if adjacentTo?( node )
+      return arcForNode( node ).weight
+    else
+      return nil
+    end
+  end
 
   # adjacentTo? :: String -> Bool
   def adjacentTo?( destination )
@@ -31,6 +39,8 @@ class Node
       raise TypeError, "destination is either a Node or a String"
     end
   end
+
+  private
 
   # arcForNode :: Node -> Arc
   def arcForNode( destinationNode )

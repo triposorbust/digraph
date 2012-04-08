@@ -7,6 +7,12 @@ class Graph
     @nodes = Hash.new
   end
 
+  def containsNode?( n );          @nodes.has_value?( n ); end
+  def containsNodeWithName?( nm ); @nodes.has_key?( nm );  end
+  def nodesCount();                @nodes.count;           end
+  def nodeWithName( nm );          @nodes[nm];             end
+# def nodes();                     @nodes.values;          end 
+
   def addNode( n )
     raise TypeError, "Graph can only add nodes" unless n.is_a? Node
     raise ArgumentError, "redundant node names" if @nodes.has_key?( n.name )
@@ -23,11 +29,5 @@ class Graph
     self.addNode(dest) if !( self.containsNode?(dest) )
     src.addArc( dest, weight )
   end
-
-  def containsNode?( n );          @nodes.has_value?( n ); end
-  def containsNodeWithName?( nm ); @nodes.has_key?( nm );  end
-  def nodesCount();                @nodes.count;           end
-  def nodeWithName( nm );          @nodes[nm];             end
-# def nodes();                     @nodes.values;          end 
 
 end
