@@ -41,12 +41,16 @@ class Node
     end
   end
 
+  def neighbours
+    return @arcs.map { |a| a.destination }
+  end
+
+  private
+
   # arcForName :: String -> Arc
   def arcForName( destinationName )
     @arcs.detect { |a| a.destination.name == destinationName }
   end
-
-  private
 
   # arcForNode :: Node -> Arc
   def arcForNode( destinationNode )

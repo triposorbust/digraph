@@ -60,17 +60,31 @@ describe Node do
     end
   end
 
+  it "has a method named neighbors" do
+    @testNode.respond_to?( :neighbours ).should   be_true
+    @growthNode.respond_to?( :neighbours ).should be_true
+  end
 
-  describe "#arcForName" do
-    NODE_TEST_RANGE.each do |i|
-      it "retrieves the arc corresponding to destination name" do
-        @growthNode.arcForName( "#{i}" ).destination.name.should eql "#{i}"
-      end
-      it "returns nil for non-adjacent destination names" do
-        @growthNode.arcForName( "FOO" ).should            be_nil
-        @growthNode.arcForName( "#{-i}" ).should          be_nil
-        @growthNode.arcForName( @growthNode.name ).should be_nil
-      end
+  describe "#neighbours" do
+    it "returns an array" do
+      @testNode.neighbours.should   be_an_instance_of Array
+      @growthNode.neighbours.should be_an_instance_of Array
+    end
+    it "returns an array with the correct population counts" do
+      @testNode.neighbours.count.should eql 0
+      @growthNode.neighbours.count.should eql NODE_TEST_RANGE.count
+    end
+    it "correctly contains all adjacent nodes" do
+      @addedNodes.each { |n|
+        @growthNode.neighbours.include?(n).should be_true
+      }
+    end
+    it "omits random nodes -- i.e. no false positive" do
+      @testNode.neighbours.include?( Node.new("Foo") ).should   be_false
+      @growthNode.neighbours.include?( Node.new("Bar") ).should be_false
+      @addedNodes.each { |n|
+        @testNode.neighbours.include?(n).should be_false
+      }
     end
   end
 
@@ -104,6 +118,19 @@ describe_internally Node do
       it "returns nil for non-adjacent nodes" do
         @growthNode.arcForNode( Node.new("FOO") ).should be_nil
         @growthNode.arcForName( @growthNode ).should     be_nil
+      end
+    end
+  end
+
+  describe "#arcForName" do
+    NODE_TEST_RANGE.each do |i|
+      it "retrieves the arc corresponding to destination name" do
+        @growthNode.arcForName( "#{i}" ).destination.name.should eql "#{i}"
+      end
+      it "returns nil for non-adjacent destination names" do
+        @growthNode.arcForName( "FOO" ).should            be_nil
+        @growthNode.arcForName( "#{-i}" ).should          be_nil
+        @growthNode.arcForName( @growthNode.name ).should be_nil
       end
     end
   end
