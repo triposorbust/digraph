@@ -31,6 +31,7 @@ describe Graph do
     end
     it "returns accurate shortest-distance values for valid start nodes" do
       distances = @fullGraph.shortest_paths( "A" )
+      distances["A"].should be_nil
       distances["B"].should eql 5.0
       distances["C"].should eql 9.0
       distances["D"].should eql 5.0
@@ -39,7 +40,7 @@ describe Graph do
     it "returns accurate shortest-distance values for valid start nodes" do
       distances = @fullGraph.shortest_paths( "B" )
       distances["A"].should be_nil
-      distances["B"].should eql 0
+      distances["B"].should eql 9.0
       distances["C"].should eql 4.0
       distances["D"].should eql 12.0
       distances["E"].should eql 6.0
@@ -57,8 +58,8 @@ describe_internally Graph do
   end
 
   it "has a method named djikstras" do
-    @testGraph.respond_to?( :djikstras! ).should be_true
-    @fullGraph.respond_to?( :djikstras! ).should be_true
+    @testGraph.respond_to?( :djikstras ).should be_true
+    @fullGraph.respond_to?( :djikstras ).should be_true
   end
 
   it "has a method named priorityNode" do
