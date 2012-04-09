@@ -11,26 +11,26 @@ describe Graph do
   end
 
   it "has a method called shortest paths" do
-    @testGraph.respond_to?( :shortest_paths ).should be_true
-    @fullGraph.respond_to?( :shortest_paths ).should be_true
+    @testGraph.respond_to?( :shortestPaths ).should be_true
+    @fullGraph.respond_to?( :shortestPaths ).should be_true
   end
 
-  describe "#shortest_paths" do
+  describe "#shortestPaths" do
     it "returns a hash" do
-      @fullGraph.shortest_paths( "A" ).should be_an_instance_of Hash
-      @fullGraph.shortest_paths( "D" ).should be_an_instance_of Hash
+      @fullGraph.shortestPaths( "A" ).should be_an_instance_of Hash
+      @fullGraph.shortestPaths( "D" ).should be_an_instance_of Hash
     end
     it "returns a hash with k-v pairs for all nodes" do
-      @fullGraph.shortest_paths( "A" ).count.should   eql 5
-      @testGraph.shortest_paths( "Foo" ).count.should eql 0
+      @fullGraph.shortestPaths( "A" ).count.should   eql 5
+      @testGraph.shortestPaths( "Foo" ).count.should eql 0
     end
     it "returns nil-valued hashes for node name not in graph" do
-      @fullGraph.shortest_paths( "G" ).values.each do |distance|
+      @fullGraph.shortestPaths( "G" ).values.each do |distance|
         distance.should be_nil
       end
     end
     it "returns accurate shortest-distance values for valid start nodes" do
-      distances = @fullGraph.shortest_paths( "A" )
+      distances = @fullGraph.shortestPaths( "A" )
       distances["A"].should be_nil
       distances["B"].should eql 5.0
       distances["C"].should eql 9.0
@@ -38,7 +38,7 @@ describe Graph do
       distances["E"].should eql 7.0
     end
     it "returns accurate shortest-distance values for valid start nodes" do
-      distances = @fullGraph.shortest_paths( "B" )
+      distances = @fullGraph.shortestPaths( "B" )
       distances["A"].should be_nil
       distances["B"].should eql 9.0
       distances["C"].should eql 4.0
@@ -46,7 +46,7 @@ describe Graph do
       distances["E"].should eql 6.0
     end
     it "returns accurate shortest-distance values for valid start nodes" do
-      distances = @fullGraph.shortest_paths( "E" )
+      distances = @fullGraph.shortestPaths( "E" )
       distances["A"].should be_nil
       distances["B"].should eql 3.0
       distances["C"].should eql 7.0

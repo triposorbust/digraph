@@ -3,7 +3,7 @@ require 'graph'
 
 class Graph
 
-  def shortest_paths( name )
+  def shortestPaths( name )
     h = Hash.new
 
     @nodes.values.each { |n| h.store( n.name, nil ) }
