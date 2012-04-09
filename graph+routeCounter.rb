@@ -7,13 +7,17 @@ class Graph
                             destinationName,
                             stops,
                             strict = false )
-    return
+    return 0 unless ( self.containsNodeWithName?( sourceName ) &&
+                      self.containsNodeWithName?( destinationName ) )
+    return 0
   end
 
   def countRoutesWithMaxDist( sourceName,
                               destinationName,
                               maxDist )
-    return
+    return 0 unless ( self.containsNodeWithName?( sourceName ) &&
+                      self.containsNodeWithName?( destinationName ) )
+    return 0
   end
 
   private
