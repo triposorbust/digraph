@@ -7,30 +7,37 @@ class Graph
     h = Hash.new
 
     @nodes.values.each { |n| h.store( n.name, nil ) }
-    if h.has_key?( name ); h[name] = 0; end
-    h = djikstras!( h, @nodes.values.clone )
+    h = djikstras( h, @nodes.values.clone,
+                   nodeWithName( name ), 0 )
 
     return h
   end
 
   private
 
-  def djikstras!( distance_hash, unvisited_nodes )
-    node = priorityNode( distance_hash, unvisited_nodes )
-    while node
-      unvisited_nodes.delete(node)
-      baseDistance = distance_hash[ node.name ]
+  def djikstras( distance_hash,
+                 unvisited_nodes,
+                 node = priorityNode( distance_hash, unvisited_nodes ),
+                 dist = nil )
+    if node
+      dist = distance_hash[ node.name ] unless dist
 
-      node.adjacency_hash.each do |name, stepDistance|
-        totalDistance = baseDistance + stepDistance      
-        if !distance_hash[ name ] || totalDistance < distance_hash[ name ]
-          distance_hash[ name ] = totalDistance
+      updated_hash = distance_hash.clone
+      node.adjacency_hash.each do |name, step|
+        total = dist + step
+        if !updated_hash[ name ] || total < updated_hash[ name ]
+          updated_hash[ name ] = total
         end
       end
 
-      node = priorityNode( distance_hash, unvisited_nodes )
+      reduced_nodes = unvisited_nodes.clone
+      reduced_nodes.delete( node )
+
+      return djikstras( updated_hash,
+                        reduced_nodes )
+    else
+      return distance_hash
     end
-    return distance_hash
   end
 
   def priorityNode( priorityHash, unvisitedNodes )
