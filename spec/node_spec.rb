@@ -60,6 +60,20 @@ describe Node do
     end
   end
 
+
+  describe "#arcForName" do
+    NODE_TEST_RANGE.each do |i|
+      it "retrieves the arc corresponding to destination name" do
+        @growthNode.arcForName( "#{i}" ).destination.name.should eql "#{i}"
+      end
+      it "returns nil for non-adjacent destination names" do
+        @growthNode.arcForName( "FOO" ).should            be_nil
+        @growthNode.arcForName( "#{-i}" ).should          be_nil
+        @growthNode.arcForName( @growthNode.name ).should be_nil
+      end
+    end
+  end
+
 end # public method check
 
 describe_internally Node do
@@ -80,19 +94,6 @@ describe_internally Node do
     @testNode.respond_to?(:adjacentTo?).should be_true
   end
 
-  describe "#arcForName" do
-    NODE_TEST_RANGE.each do |i|
-      it "retrieves the arc corresponding to destination name" do
-        @growthNode.arcForName( "#{i}" ).destination.name.should eql "#{i}"
-      end
-      it "returns nil for non-adjacent destination names" do
-        @growthNode.arcForName( "FOO" ).should            be_nil
-        @growthNode.arcForName( "#{-i}" ).should          be_nil
-        @growthNode.arcForName( @growthNode.name ).should be_nil
-      end
-    end
-  end
-  
   describe "#arcForNode" do
     NODE_TEST_RANGE.each do |i|
       it "retrieves the arc corresponding to the destination node" do

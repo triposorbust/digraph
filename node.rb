@@ -41,16 +41,16 @@ class Node
     end
   end
 
+  # arcForName :: String -> Arc
+  def arcForName( destinationName )
+    @arcs.detect { |a| a.destination.name == destinationName }
+  end
+
   private
 
   # arcForNode :: Node -> Arc
   def arcForNode( destinationNode )
     @arcs.detect { |a| a.destination == destinationNode }
-  end
-
-  # arcForName :: String -> Arc
-  def arcForName( destinationName )
-    @arcs.detect { |a| a.destination.name == destinationName }
   end
 
 end
