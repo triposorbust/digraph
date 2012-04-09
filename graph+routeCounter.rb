@@ -8,8 +8,10 @@ class Graph
                             strict = false )
     return 0 unless ( self.containsNodeWithName?( sourceName ) &&
                       self.containsNodeWithName?( destinationName ) )
+
     source      = self.nodeWithName( sourceName )
     destination = self.nodeWithName( destinationName )
+
     return routesUntilStop( source, destination, stops, strict )
   end
 
@@ -18,8 +20,10 @@ class Graph
                               maxDist )
     return 0 unless ( self.containsNodeWithName?( sourceName ) &&
                       self.containsNodeWithName?( destinationName ) )
+
     source      = self.nodeWithName( sourceName )
     destination = self.nodeWithName( destinationName )
+
     return routesUntilDist( source, destination, maxDist )
   end
 
