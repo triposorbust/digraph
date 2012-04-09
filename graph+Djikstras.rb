@@ -23,7 +23,7 @@ class Graph
       dist = distance_hash[ node.name ] unless dist
 
       updated_hash = distance_hash.clone
-      node.adjacency_hash.each do |name, step|
+      node.adjacencyHash.each do |name, step|
         total = dist + step
         if !updated_hash[ name ] || total < updated_hash[ name ]
           updated_hash[ name ] = total

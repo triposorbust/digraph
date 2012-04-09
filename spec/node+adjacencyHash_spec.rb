@@ -19,29 +19,29 @@ describe Node do
     end
   end
 
-  it "has a method called adjacency_hash" do
-    @testNode.respond_to?( :adjacency_hash ).should   be_true
-    @growthNode.respond_to?( :adjacency_hash ).should be_true
+  it "has a method called adjacencyHash" do
+    @testNode.respond_to?( :adjacencyHash ).should   be_true
+    @growthNode.respond_to?( :adjacencyHash ).should be_true
   end
 
-  describe "#adjacency_hash" do
+  describe "#adjacencyHash" do
     it "returns a hash" do
-      @testNode.adjacency_hash.should be_an_instance_of   Hash
-      @growthNode.adjacency_hash.should be_an_instance_of Hash
+      @testNode.adjacencyHash.should be_an_instance_of   Hash
+      @growthNode.adjacencyHash.should be_an_instance_of Hash
     end
     it "should contain the same number of elements as arcs" do
-      @testNode.adjacency_hash.count.should   eql 0
-      @growthNode.adjacency_hash.count.should eql D_NODE_TEST_RANGE.count
+      @testNode.adjacencyHash.count.should   eql 0
+      @growthNode.adjacencyHash.count.should eql D_NODE_TEST_RANGE.count
     end
     it "should return nil for non-elements" do
       @addedNodes.each { |node|
-        @testNode.adjacency_hash[ node.name ].should be_nil
+        @testNode.adjacencyHash[ node.name ].should be_nil
       }
     end
     it "should store accurate weights for elements" do
       D_NODE_TEST_RANGE.each { |i|
         node = @addedNodes[ i-1 ]
-        @growthNode.adjacency_hash[ node.name ].should eql i
+        @growthNode.adjacencyHash[ node.name ].should eql i
       }
     end
   end
