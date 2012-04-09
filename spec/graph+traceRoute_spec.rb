@@ -43,33 +43,33 @@ describe_internally Graph do
   end
 
   it "has a helper method called tracer" do
-    @testGraph.respond_to?( :tracer ).should be_true
-    @fullGraph.respond_to?( :tracer ).should be_true
+    @testGraph.respond_to?( :traceR ).should be_true
+    @fullGraph.respond_to?( :traceR ).should be_true
   end
 
   describe "#tracer" do
     it "return the second argument when passed an empty list" do
-      @testGraph.tracer( Array.new, 5 ).should  eql  5
-      @testGraph.tracer( Array.new, -1 ).should eql -1
+      @testGraph.traceR( Array.new, 5 ).should  eql  5
+      @testGraph.traceR( Array.new, -1 ).should eql -1
     end
     it "returns the second argument when passed a singleton" do
-      @testGraph.tracer( [Node.new( "Foo" )], 5 ).should  eql  5
-      @testGraph.tracer( [Node.new( "Foo" )], -1 ).should eql -1
+      @testGraph.traceR( [Node.new( "Foo" )], 5 ).should  eql  5
+      @testGraph.traceR( [Node.new( "Foo" )], -1 ).should eql -1
     end
     it "returns nil when the second argument is nil" do
       testArray = Array.new
-      @testGraph.tracer( testArray, nil ).should be_nil
+      @testGraph.traceR( testArray, nil ).should be_nil
       testArray << Node.new( "Foo" )
-      @testGraph.tracer( testArray, nil ).should be_nil
+      @testGraph.traceR( testArray, nil ).should be_nil
       testArray << Node.new( "Bar" )
-      @testGraph.tracer( testArray, nil ).should be_nil
+      @testGraph.traceR( testArray, nil ).should be_nil
     end
     it "adds the arc length between nodes to the accumulator" do
       # AB = 5
       a = @fullGraph.nodeWithName( "A" )
       b = @fullGraph.nodeWithName( "B" )
-      @fullGraph.tracer( [a,b], 5 ).should eql 10.0
-      @fullGraph.tracer( [a,b], 0 ).should eql 5.0
+      @fullGraph.traceR( [a,b], 5 ).should eql 10.0
+      @fullGraph.traceR( [a,b], 0 ).should eql 5.0
     end
   end
 
