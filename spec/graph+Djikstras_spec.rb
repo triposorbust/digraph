@@ -45,6 +45,14 @@ describe Graph do
       distances["D"].should eql 12.0
       distances["E"].should eql 6.0
     end
+    it "returns accurate shortest-distance values for valid start nodes" do
+      distances = @fullGraph.shortest_paths( "E" )
+      distances["A"].should be_nil
+      distances["B"].should eql 3.0
+      distances["C"].should eql 7.0
+      distances["D"].should eql 15.0
+      distances["E"].should eql 9.0
+    end
   end
 
 end
