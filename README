@@ -1,4 +1,10 @@
+$ ruby main.rb
+
 # directed graph library
 # 1. directed graph classes
 # 2. parser builds toy graph from input
 # 3. basic search functionality
+
+# wish list
+# 1. printing library for looking at graphs
+# 2. consolidate routeCounter methods. use metaprogramming here?
