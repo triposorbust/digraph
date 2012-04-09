@@ -48,7 +48,7 @@ class Graph
   #
   #  USE: Call this as if it had three arguments. The recursive cases will
   #       handle the toggle.
-  def routesUntilDist( node, targetNode, remaining, initialCall = true)
+  def routesUntilDist( node, targetNode, remaining, initialCall = true )
     return 0 if remaining <= 0
 
     success = 0
