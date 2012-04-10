@@ -2,37 +2,37 @@ require 'graph'
 
 class Graph
 
-  def countRoutesWithStops( sourceName,
-                            destinationName,
+  def countRoutesWithStops( srcNm,
+                            destNm,
                             stops,
                             strict = false )
-    return 0 unless ( self.containsNodeWithName?( sourceName ) &&
-                      self.containsNodeWithName?( destinationName ) )
+    return 0 unless ( self.containsNodeWithName?( srcNm ) &&
+                      self.containsNodeWithName?( destNm ) )
 
-    source      = self.nodeWithName( sourceName )
-    destination = self.nodeWithName( destinationName )
+    src  = self.nodeWithName( srcNm )
+    dest = self.nodeWithName( destNm )
 
-    return routesUntilStop( source, destination, stops, strict )
+    return routesUntilStop( src, dest, stops, strict )
   end
 
   private
 
-  def routesUntilStop( node, targetNode, stepsRemaining, strict )
-    return 0 if stepsRemaining == 0
+  def routesUntilStop( nd, targetNd, stepsRemain, strict )
+    return 0 if stepsRemain == 0
 
-    thisStepRoutes = 0
-    if stepsRemaining == 1 || !strict
-      thisStepRoutes += 1 if node.adjacentTo?(targetNode)
+    success = 0
+    if stepsRemain == 1 || !strict
+      success = 1 if nd.adjacentTo?(targetNd)
     end
 
-    nextStepRoutes = 0
-    node.neighbours.each { |neighbour|
-      nextStepRoutes += routesUntilStop( neighbour,
-                                         targetNode,
-                                         stepsRemaining - 1,
-                                         strict )
+    successR = 0
+    nd.neighbours.each { |neighbour|
+      successR += routesUntilStop( neighbour,
+                                   targetNd,
+                                   stepsRemain - 1,
+                                   strict )
     }
-    return thisStepRoutes + nextStepRoutes
+    return success + successR
   end
 
 end
