@@ -3,12 +3,12 @@ require 'graph'
 
 class Graph
 
-  def shortestPaths( name )
+  def shortestPaths( srcName )
     h = Hash.new
 
     @nodes.values.each { |n| h.store( n.name, nil ) }
     h = djikstras( h, @nodes.values.clone,
-                   nodeWithName( name ), 0 )
+                   nodeWithName( srcName ), 0 )
 
     return h
   end
