@@ -2,16 +2,16 @@ require 'graph'
 
 class Graph
 
-  def countRoutesWithMaxDist( sourceName,
-                              destinationName,
+  def countRoutesWithMaxDist( srcNm,
+                              destNm,
                               maxDist )
-    return 0 unless ( self.containsNodeWithName?( sourceName ) &&
-                      self.containsNodeWithName?( destinationName ) )
+    return 0 unless ( self.containsNodeWithName?( srcNm ) &&
+                      self.containsNodeWithName?( destNm ) )
 
-    source      = self.nodeWithName( sourceName )
-    destination = self.nodeWithName( destinationName )
+    src  = self.nodeWithName( srcNm )
+    dest = self.nodeWithName( destNm )
 
-    return routesUntilDist( source, destination, maxDist )
+    return routesUntilDist( src, dest, maxDist )
   end
 
   private
@@ -21,19 +21,19 @@ class Graph
   #
   #  USE: Call this as if it had three arguments. The recursive cases will
   #       handle the toggle.
-  def routesUntilDist( node, targetNode, remaining, initialCall = true )
+  def routesUntilDist( nd, targetNd, remaining, initialCall = true )
     return 0 if remaining <= 0
 
     success = 0
-    if node.equal?( targetNode ) && !initialCall
+    if nd.equal?( targetNd ) && !initialCall
       success = 1
     end
 
     successR = 0
-    node.neighbours.each { |neighbour|
+    nd.neighbours.each { |neighbour|
       successR += routesUntilDist( neighbour,
-                                   targetNode,
-                                   remaining - node.distanceTo(neighbour),
+                                   targetNd,
+                                   remaining - nd.distanceTo( neighbour ),
                                    false )
     }
 
