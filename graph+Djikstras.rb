@@ -48,7 +48,7 @@ class Graph
     end
 
     best = sortedNodes[0]
-    return best && priorityHash[ best.name ] ? sortedNodes[0] : nil
+    return best && priorityHash[ best.name ] ? best : nil
   end
 
   def ncompare( i, j ) # comparison on nullables

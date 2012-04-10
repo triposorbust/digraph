@@ -47,12 +47,12 @@ class Node
 
   private
 
-  # arcForName :: String -> Arc
+  # arcForName :: String -> Maybe Arc
   def arcForName( destinationName )
     @arcs.detect { |a| a.destination.name == destinationName }
   end
 
-  # arcForNode :: Node -> Arc
+  # arcForNode :: Node -> Maybe Arc
   def arcForNode( destinationNode )
     @arcs.detect { |a| a.destination == destinationNode }
   end

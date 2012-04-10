@@ -1,10 +1,26 @@
-$ ruby main.rb
+LIBRARY DESIGN:
 
-# directed graph library
-# 1. directed graph classes
-# 2. parser builds toy graph from input
-# 3. basic search functionality
+Graphs are a set of Nodes, and Nodes are a set of Arcs (to other Nodes).
+The toy Graph library (Arc, Node, Graph) is usable for other applications.
+A lot of typechecking happens here to ensure that Graphs are reliable.
 
-# wish list
-# 1. printing library for looking at graphs
-# 2. consolidate routeCounter methods. use metaprogramming here?
+The routing algorithms can be "dropped-in" to the Graph as needed.
+Most of these have a single-point-of-entry: only one public handle to call.
+
+Djikstra's is a simple implementation of Djikstra's algorithm.
+This returns a hash of single-source shortest paths for graph.
+See: Cormen, Leiserson, Rivest, Stein. "Introduction to Algorithms." Ch. 24.3.
+
+A couple of recursive pathcounting algorithms.
+These do NOT return routes, only route counts.
+To get the routes, would need to be able to backtrack across arcs.
+
+A simple route-tracing algorithm.
+
+---
+
+WISH LIST:
+0. a pretty printer for the graph class: graph+Printer.rb
+1. route counting methods are REALLY similar. Consolidate ???
+
+
