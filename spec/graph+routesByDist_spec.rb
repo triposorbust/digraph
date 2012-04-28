@@ -62,14 +62,14 @@ describe_internally Graph do
     it "recursive call returns 1 for positive distances at target node" do
       a = @fullGraph.nodeWithName( "A" )
       b = @fullGraph.nodeWithName( "B" )
-      @fullGraph.routesUntilDist( a, a, 1, false ).should eql 1
-      @fullGraph.routesUntilDist( b, b, 1, false ).should eql 1
+      @fullGraph.routesUntilDist( a, a, 1 ).should eql 1
+      @fullGraph.routesUntilDist( b, b, 1 ).should eql 1
     end
     it "initial call returns 0 for too-small positive distances at target" do
       a = @fullGraph.nodeWithName( "A" )
       b = @fullGraph.nodeWithName( "B" )
-      @fullGraph.routesUntilDist( a, a, 1, true ).should eql 0
-      @fullGraph.routesUntilDist( b, b, 1, true ).should eql 0
+      @fullGraph.routesUntilDist( a, a, 1 ).should eql 0
+      @fullGraph.routesUntilDist( b, b, 1 ).should eql 0
     end
     it "returns correct route counts for searches" do
       c = @fullGraph.nodeWithName( "C" )

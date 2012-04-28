@@ -21,20 +21,21 @@ class Graph
   #
   #  USE: Call this as if it had three arguments. The recursive cases will
   #       handle the toggle.
-  def routesUntilDist( nd, targetNd, remaining, initialCall = true )
+  def routesUntilDist( nd, targetNd, remaining )
     return 0 if remaining <= 0
 
     success = 0
-    if nd.equal?( targetNd ) && !initialCall
+    if nd.equal?( targetNd )
       success = 1
     end
+
+    
 
     successR = 0
     nd.neighbours.each { |neighbour|
       successR += routesUntilDist( neighbour,
                                    targetNd,
-                                   remaining - nd.distanceTo( neighbour ),
-                                   false )
+                                   remaining - nd.distanceTo( neighbour ) )
     }
 
     return success + successR
