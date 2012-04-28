@@ -31,6 +31,7 @@ class Node
   end
 
   # adjacentTo? :: String -> Bool
+  # adjacentTo? :: Node   -> Bool
   def adjacentTo?( destination )
     if destination.is_a? Node
       return arcForNode( destination ) ? true : false

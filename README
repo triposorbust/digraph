@@ -19,8 +19,17 @@ A simple route-tracing algorithm.
 
 ---
 
+TODO:
+0. rename methods with underscore -- easier to read than camelcase
+1. make arc weights immutable
+2. consider using symbols instead of strings for names...
+3. should we interact through names or node objects?
+4. safety checking at shortestPaths call
+5. nodeWithName and nodeWithName
+6. short-circuit djikstra's after desired node is found
+
+---
+
 WISH LIST:
 0. a pretty printer for the graph class: graph+Printer.rb
 1. route counting methods are REALLY similar. Consolidate ???
-
-
