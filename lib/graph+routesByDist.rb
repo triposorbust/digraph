@@ -16,20 +16,14 @@ class Graph
 
   private
 
-  # HACK: initialCall is here because we don't consider 'standing still'
-  #       to be a route from A to A.
-  #
-  #  USE: Call this as if it had three arguments. The recursive cases will
-  #       handle the toggle.
   def routesUntilDist( nd, targetNd, remaining )
     return 0 if remaining <= 0
 
     success = 0
-    if nd.equal?( targetNd )
+
+    if nd.adjacentTo?( targetNd ) && nd.distanceTo( targetNd ) < remaining
       success = 1
     end
-
-    
 
     successR = 0
     nd.neighbours.each { |neighbour|
